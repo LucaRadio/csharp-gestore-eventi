@@ -18,7 +18,7 @@ namespace csharp_gestore_eventi
     {
         public ExceptionDate()
         {
-            Console.WriteLine("Insert a valid event's date");
+            Console.WriteLine("Insert a valid event's Date");
 
         }
     }

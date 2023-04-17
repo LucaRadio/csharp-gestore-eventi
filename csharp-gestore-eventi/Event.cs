@@ -9,53 +9,10 @@ using System.Xml.Linq;
 namespace csharp_gestore_eventi
 {
     internal class Event
-    {
-        private string title;
-        private DateTime date;
-        public string Title
-        {
-            get { return title; }
-            set {
-                title = value;
-                while (String.IsNullOrEmpty(title))
-                {
-                    Console.Write("Insert a valid name: ");
-                    string name = Console.ReadLine();
-                    title = name;
-                    if (String.IsNullOrEmpty(title))
-                    {
-                        new ExceptionTitle();
-                    }
-                }
-            }
-        }
-        public DateTime Date 
-        {
-            get {
+    { 
+        public string Title { get; set; }
+        public DateTime Date { get; set; }
 
-                return date;
-            }
-            set {
-                date = value;
-                while (DateTime.Compare( date,DateTime.Now) <= 0)
-                {
-
-                    string? dateInserted = Console.ReadLine();
-                    DateTime date;
-                    DateTime.TryParse(dateInserted, out date);
-                    this.date = date;
-
-
-
-                    if (DateTime.Compare(date, date) < 0)
-                    {
-                        new ExceptionDate();
-                    }
-                }
-                
-                
-            }
-        }
         public int MaxSeats { get; }
         public int ReservedSeats { get; private set; }
         

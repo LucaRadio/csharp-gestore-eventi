@@ -11,8 +11,18 @@ namespace csharp_gestore_eventi
 
             Console.Write("Insert your event's program name : ");
             string? nameProgram = Console.ReadLine();
+            while (String.IsNullOrEmpty(nameProgram))
+            {
+                new ExceptionTitle();
+                nameProgram = Console.ReadLine();
+            }
             Console.Write("How much events do you want to add? : ");
-            int amount = Convert.ToInt32(Console.ReadLine());
+            int amount =0;
+            while (!int.TryParse(Console.ReadLine(), out amount) || amount <= 0)
+            {
+                Console.WriteLine("Insert a valid number");
+            }
+
             int index = 0;
             EventProgram eventProgram = new EventProgram(nameProgram);
             Console.WriteLine($"=======================================================================");
@@ -27,7 +37,7 @@ namespace csharp_gestore_eventi
                 }
 
 
-                Console.Write($"Insert a Event{index + 1}'s date (dd/mm/yyyy): ");
+                Console.Write($"Insert a Event{index + 1}'s Date (dd/mm/yyyy): ");
                 string? date = Console.ReadLine();
                 DateTime dateToInsert;
                 DateTime.TryParse(date, out dateToInsert);
@@ -116,14 +126,8 @@ namespace csharp_gestore_eventi
 
                 Console.Write($"Insert a Conference's name: ");
                 string? name = Console.ReadLine();
-                while (String.IsNullOrEmpty(name))
-                {
-                    new ExceptionTitle();
-                    name = Console.ReadLine();
-                }
 
-
-                Console.Write($"Insert a Conference's date (dd/mm/yyyy): ");
+                Console.Write($"Insert a Conference's Date (dd/mm/yyyy): ");
                 string? date = Console.ReadLine();
                 DateTime dateToInsert;
                 DateTime.TryParse(date, out dateToInsert);
@@ -188,7 +192,7 @@ namespace csharp_gestore_eventi
             Console.WriteLine($"Here's your events program: ");
             eventProgram.PrintProgram(eventProgram.events);
             Console.WriteLine($"=======================================================================");
-            Console.Write("Insert a date (dd/mm/yyyy) to know which events there are today: ");
+            Console.Write("Insert a Date (dd/mm/yyyy) to know which events there are today: ");
             DateTime eventTodayDate;
             DateTime.TryParse(Console.ReadLine(), out eventTodayDate);
             ArrayRecivedPrint(eventProgram.eventsFiltered(eventProgram.events, eventTodayDate));
@@ -208,9 +212,10 @@ namespace csharp_gestore_eventi
             }
             else
             {
-                Console.WriteLine("No events found in that date");
+                Console.WriteLine("No events found in that Date");
             }
 
         }
+        
     }
 }
